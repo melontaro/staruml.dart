@@ -301,7 +301,7 @@ class DartSereverCodeGenerator {
   generate (elem, basePath, options) {
     var result = new $.Deferred()
     var fullPath, codeWriter, file
-
+    
     // Package (a directory with __init__.dart)
     if (elem instanceof type.UMLPackage) {
       fullPath = path.join(basePath, elem.name)
@@ -314,10 +314,11 @@ class DartSereverCodeGenerator {
 
     // Class
     } else if (elem instanceof type.UMLClass || elem instanceof type.UMLInterface) {
+      codeWriter = new codegen.CodeWriter(this.getIndentString(options))
       var prefix=options.prefix
       var upStr=codeWriter.getFunctionStr(elem.name)
       fullPath = basePath + '/' + prefix+upStr + '.dart'
-      codeWriter = new codegen.CodeWriter(this.getIndentString(options))
+      
  
       codeWriter.writeLine('import \'dart:async\';')
 
@@ -330,10 +331,11 @@ class DartSereverCodeGenerator {
 
     // Enum
     } else if (elem instanceof type.UMLEnumeration) {
+      codeWriter = new codegen.CodeWriter(this.getIndentString(options))
       var prefix=options.prefix
       var upStr=codeWriter.getFunctionStr(elem.name)
       fullPath = basePath + '/' + prefix+ upStr+ '.dart'
-      codeWriter = new codegen.CodeWriter(this.getIndentString(options))
+      
 
       codeWriter.writeLine()
       this.writeEnum(codeWriter, elem, options)
