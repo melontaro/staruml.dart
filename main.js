@@ -25,10 +25,11 @@ const codeGenerator = require('./code-generator')
 const codeServereGenerator = require('./code-server-generator')
 function getGenOptions () {
   return {
-    installPath: app.preferences.get('dart.gen.installPath'),
     useTab: app.preferences.get('dart.gen.useTab'),
     indentSpaces: app.preferences.get('dart.gen.indentSpaces'),
-    docString: app.preferences.get('dart.gen.docString')
+    docString: app.preferences.get('dart.gen.docString'),
+    prefix: app.preferences.get('dart.gen.prefix')
+    
   }
 }
 

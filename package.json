@@ -1,15 +1,15 @@
 {
-  "name": "touchafflatus.staruml-Dart",
+  "name": "touchafflatus.staruml_dart",
   "title": "Dart",
   "description": "Dart code generator",
-  "homepage": "https://github.com/xuyin58/staruml-Dart",
-  "issues": "https://github.com/xuyin58/staruml-Dart/issues",
+  "homepage": "https://github.com/melontaro/staruml.dart",
+  "issues": "https://github.com/melontaro/staruml.dart/issues",
   "keywords": ["Dart"],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "name": "Touch Afflatus",
     "email": "axuyin@gmail.com",
-    "url": "https://github.com/xuyin58"
+    "url": "https://github.com/melontaro"
   },
   "license": "MIT",
   "engines": {

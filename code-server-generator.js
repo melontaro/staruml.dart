@@ -28,7 +28,7 @@ const codegen = require('./codegen-utils')
 /**
  * Dart Code Generator
  */
-class DartCodeGenerator {
+class DartSereverCodeGenerator {
   /**
    * @constructor
    *
@@ -135,7 +135,7 @@ class DartCodeGenerator {
   writeSetFunction (codeWriter, elem, options) {
     var hasBody = false
     codeWriter.indent()
-
+    
    // from attributes
 
    if (elem.attributes.length > 0) {
@@ -225,7 +225,7 @@ class DartCodeGenerator {
     var self = this
     var line = ''
     var _inherits = this.getInherits(elem)
-
+    var prefix=options.prefix
     // Import
     if (_inherits.length > 0) {
       _inherits.forEach(function (e) {
@@ -234,9 +234,9 @@ class DartCodeGenerator {
       })
       codeWriter.writeLine()
     }
-
+    var upStr=codeWriter.getFunctionStr(elem.name);
     // Class
-    line = 'class ' + elem.name + ' extends AVObject '
+    line = 'class ' +prefix+ upStr + ' extends AVObject '
 
     // Inherits
     if (_inherits.length > 0) {
@@ -244,9 +244,9 @@ class DartCodeGenerator {
     }
     codeWriter.writeLine(line + '{')
     codeWriter.writeLine()
-    codeWriter.writeLine(elem.name+'() : super("'+elem.name+'");')
+    codeWriter.writeLine(prefix+ upStr+'() : super("'+elem.name+'");')
     codeWriter.writeLine()
-    codeWriter.writeLine( elem.name+'.fromQueryBackString(String queriedString)')
+    codeWriter.writeLine( prefix+ upStr+'.fromQueryBackString(String queriedString)')
     codeWriter.writeLine( ': super.fromQueryBackString(queriedString);')
  
     codeWriter.indent()
@@ -269,7 +269,7 @@ class DartCodeGenerator {
       this.writeGetFunction(codeWriter, elem, options)
       codeWriter.writeLine()
       // saveFunction
-      codeWriter.writeLine('Future<'+elem.name+'> save() async {')
+      codeWriter.writeLine('Future<'+prefix+ upStr+'> save() async {')
       codeWriter.writeLine('super.save();')
       codeWriter.writeLine('return this;')
       codeWriter.writeLine('}')
@@ -302,7 +302,7 @@ class DartCodeGenerator {
     var result = new $.Deferred()
     var fullPath, codeWriter, file
 
-    // Package (a directory with __init__.py)
+    // Package (a directory with __init__.dart)
     if (elem instanceof type.UMLPackage) {
       fullPath = path.join(basePath, elem.name)
       fs.mkdirSync(fullPath)
@@ -314,10 +314,11 @@ class DartCodeGenerator {
 
     // Class
     } else if (elem instanceof type.UMLClass || elem instanceof type.UMLInterface) {
-      fullPath = basePath + '/' + elem.name + '.dart'
+      var prefix=options.prefix
+      var upStr=codeWriter.getFunctionStr(elem.name)
+      fullPath = basePath + '/' + prefix+upStr + '.dart'
       codeWriter = new codegen.CodeWriter(this.getIndentString(options))
-     // codeWriter.writeLine(options.installPath)
-      //codeWriter.writeLine('#-*- coding: utf-8 -*-')
+ 
       codeWriter.writeLine('import \'dart:async\';')
 
       codeWriter.writeLine()
@@ -329,10 +330,11 @@ class DartCodeGenerator {
 
     // Enum
     } else if (elem instanceof type.UMLEnumeration) {
-      fullPath = basePath + '/' + elem.name + '.dart'
+      var prefix=options.prefix
+      var upStr=codeWriter.getFunctionStr(elem.name)
+      fullPath = basePath + '/' + prefix+ upStr+ '.dart'
       codeWriter = new codegen.CodeWriter(this.getIndentString(options))
-      codeWriter.writeLine(options.installPath)
-      //codeWriter.writeLine('#-*- coding: utf-8 -*-')
+
       codeWriter.writeLine()
       this.writeEnum(codeWriter, elem, options)
       fs.writeFileSync(fullPath, codeWriter.getData())
@@ -353,11 +355,11 @@ class DartCodeGenerator {
  */
 function generate_server (baseModel, basePath, options) {
   var fullPath
-  var dartCodeGenerator = new DartCodeGenerator(baseModel, basePath)
+  var dartSereverCodeGenerator = new DartSereverCodeGenerator(baseModel, basePath)
   fullPath = basePath + '/' + baseModel.name
   fs.mkdirSync(fullPath)
   baseModel.ownedElements.forEach(child => {
-    dartCodeGenerator.generate(child, fullPath, options)
+    dartSereverCodeGenerator.generate(child, fullPath, options)
   })
 }
 

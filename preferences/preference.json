@@ -6,12 +6,6 @@
       "text": "dart Code Generation",
       "type": "section"
     },
-    "dart.gen.installPath": {
-      "text": "Installation Path",
-      "description": "Installation path of dart",
-      "type": "string",
-      "default": "#!/usr/bin/dart"
-    },
     "dart.gen.useTab": {
       "text": "Use Tab",
       "description": "Use Tab for indentation instead of spaces.",
@@ -29,6 +23,13 @@
       "description": "Generate docstrings.",
       "type": "check",
       "default": true
-    }        
+    },
+    "dart.gen.prefix": {
+      "text": "Generate Prefix",
+      "description": "Generate Prefix for Leancloud.",
+      "type": "string",
+      "default": "AV"
+    }      
+
   }
 }

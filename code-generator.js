@@ -115,7 +115,8 @@ class DartCodeGenerator {
         line += ' = ' + elem.defaultValue
       } else {
         line += ' ;'
-        line += ' //'+elem.documentation
+        if(elem.documentation.length>0){line += ' //'+elem.documentation}
+        
       }
       codeWriter.writeLine(line)
     }
@@ -336,8 +337,7 @@ class DartCodeGenerator {
     } else if (elem instanceof type.UMLClass || elem instanceof type.UMLInterface) {
       fullPath = basePath + '/' + elem.name + '.dart'
       codeWriter = new codegen.CodeWriter(this.getIndentString(options))
-     // codeWriter.writeLine(options.installPath)
-      //codeWriter.writeLine('#-*- coding: utf-8 -*-')
+
       codeWriter.writeLine('import \'package:json_annotation\/json_annotation.dart\';')
       codeWriter.writeLine()
       codeWriter.writeLine('part  \''+elem.name+'.g.dart\';')
@@ -350,8 +350,7 @@ class DartCodeGenerator {
     } else if (elem instanceof type.UMLEnumeration) {
       fullPath = basePath + '/' + elem.name + '.dart'
       codeWriter = new codegen.CodeWriter(this.getIndentString(options))
-      codeWriter.writeLine(options.installPath)
-      //codeWriter.writeLine('#-*- coding: utf-8 -*-')
+
       codeWriter.writeLine()
       this.writeEnum(codeWriter, elem, options)
       fs.writeFileSync(fullPath, codeWriter.getData())
