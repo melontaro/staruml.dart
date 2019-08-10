@@ -1,0 +1,34 @@
+{
+  "id": "dart",
+  "name": "dart",
+  "schema": {
+    "dart.gen": {
+      "text": "dart Code Generation",
+      "type": "section"
+    },
+    "dart.gen.installPath": {
+      "text": "Installation Path",
+      "description": "Installation path of dart",
+      "type": "string",
+      "default": "#!/usr/bin/dart"
+    },
+    "dart.gen.useTab": {
+      "text": "Use Tab",
+      "description": "Use Tab for indentation instead of spaces.",
+      "type": "check",
+      "default": false
+    },
+    "dart.gen.indentSpaces": {
+      "text": "Indent Spaces",
+      "description": "Number of spaces for indentation.",
+      "type": "number",
+      "default": 4
+    },
+    "dart.gen.docString": {
+      "text": "Docstring",
+      "description": "Generate docstrings.",
+      "type": "check",
+      "default": true
+    }        
+  }
+}

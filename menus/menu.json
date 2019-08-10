@@ -1,0 +1,21 @@
+{
+  "menu": [
+    {
+      "id": "tools",
+      "submenu": [
+        {
+          "label": "Dart",
+          "id": "tools.dart",
+          "submenu": [
+            { "label": "Generate Client Code...", "id": "tools.dart.generate", "command": "dart:generate" },
+            { "type": "separator" },
+            { "label": "Generate Server Code...", "id": "tools.dart.generate_server", "command": "dart:generate_server" },
+            {"type":"separator"},
+            { "label": "Configure...", "id": "tools.dart.configure", "command": "dart:configure" }
+            
+          ]
+        }
+      ]
+    }
+  ]
+}
